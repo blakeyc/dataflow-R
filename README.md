@@ -11,6 +11,11 @@ of how to get R working using Python. I have slightly adjusted his original
 example to give a slightly cleaner implementation and remove the task of using
 `pip install rpy2` from the workflow code.
 
+## Dependencies
+
+* apache-beam-sdk (0.6.0.dev0)
+* google-cloud-dataflow (0.5.1)
+
 ## Notes
 
 * While this is a very basic workflow, it will still take just under 10 mins to
@@ -30,10 +35,11 @@ in the actual main code of your workflow.
     from rpy2.robjects.packages import importr
 
     utils = importr('utils')
-    utils.chooseCRANmirror(ind=1)
 
-    utils.install_packages('stringr')
+    # Install any required R packages
+    utils.install_packages('stringr', repos='http://cran.us.r-project.org')
 
+    # Import packages
     stringr = importr('stringr')
 
 For production workflows where there are many dependencies, we may look at other

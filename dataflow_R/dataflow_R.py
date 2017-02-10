@@ -15,10 +15,9 @@ from rpy2.robjects.packages import importr
 # Create an instance of R
 r = robjects.r
 utils = importr('utils')
-utils.chooseCRANmirror(ind=1)
 
 # Install any required R packages
-utils.install_packages('stringr')
+utils.install_packages('stringr', repos='http://cran.us.r-project.org')
 
 # Import packages
 stringr = importr('stringr')
